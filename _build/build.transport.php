@@ -3,34 +3,31 @@
  * Build the transport package
  */
 
-$tstart = explode(' ', microtime());
-$tstart = $tstart[1] + $tstart[0];
+$tstart = microtime(true);
 set_time_limit(0);
 
 // Define package names
 define('PKG_NAME', 'VerticalNavigation');
 define('PKG_NAME_LOWER', strtolower(PKG_NAME));
-define('PKG_VERSION', '0.0.1');
-define('PKG_RELEASE', 'dev');
+define('PKG_VERSION', '0.1.0');
+define('PKG_RELEASE', 'pl');
 
 // Define build paths
 $root = dirname(__DIR__) . '/';
 $sources = array(
-    'root'           => $root,
-    'build'          => $root . '_build/',
-    'data'           => $root . '_build/data/',
-    'resolvers'      => $root . '_build/resolvers/',
-    'validators'     => $root . '_build/validators/',
-    'chunks'         => $root . 'core/elements/chunks/',
-    'lexicon'        => $root . 'core/elements/lexicon/',
-    'docs'           => $root . 'core/docs/',
-    'elements'       => $root . 'core/elements/',
+    'root'       => $root,
+    'build'      => $root . '_build/',
+    'data'       => $root . '_build/data/',
+    'resolvers'  => $root . '_build/resolvers/',
+    'validators' => $root . '_build/validators/',
+    'chunks'     => $root . 'core/elements/chunks/',
+    'lexicon'    => $root . 'core/elements/lexicon/',
+    'elements'   => $root . 'core/elements/',
 
-    'source_assets'  => $root . 'assets/',
-    'manager_assets' => $root . 'manager/',
-    'source_core'    => $root . 'core/',
+    'assets'     => $root . 'assets/',
+    'core'       => $root . 'core/',
 
-    'build_dir'      => '/home/_builds/verticalnavigation/'
+    'build_dir'  => '/home/_builds/verticalnavigation/'
 );
 unset($root);
 
@@ -100,14 +97,13 @@ $attr = array(
 );
 $vehicle = $builder->createVehicle($category, $attr);
 
-
 $modx->log(modX::LOG_LEVEL_INFO, 'Adding file resolvers to category...');
 $vehicle->resolve('file', array(
-    'source' => $sources['manager_assets'],
-    'target' => "return MODX_MANAGER_PATH . 'assets/components/" . PKG_NAME_LOWER . "/';",
+    'source' => $sources['assets'],
+    'target' => "return MODX_ASSETS_PATH . 'components/" . PKG_NAME_LOWER . "/';",
 ));
 $vehicle->resolve('file', array(
-    'source' => $sources['source_core'],
+    'source' => $sources['core'],
     'target' => "return MODX_CORE_PATH . 'components/" . PKG_NAME_LOWER . "/';",
 ));
 $builder->putVehicle($vehicle);
@@ -133,17 +129,16 @@ unset($settings, $setting, $attributes);
 // Now pack in the license file, readme and setup options
 $modx->log(modX::LOG_LEVEL_INFO, 'Adding package attributes and setup options...');
 $builder->setPackageAttributes(array(
-    'license'   => file_get_contents($sources['docs'] . 'license.txt'),
-    'readme'    => file_get_contents($sources['docs'] . 'readme.txt'),
-    'changelog' => file_get_contents($sources['docs'] . 'changelog.txt'),
+    'license'   => file_get_contents($sources['root'] . 'LICENSE.md'),
+    'readme'    => file_get_contents($sources['root'] . 'README.md'),
+    'changelog' => file_get_contents($sources['root'] . 'CHANGELOG.md'),
 ));
 
 // Zip up package
 $modx->log(modX::LOG_LEVEL_INFO, 'Packing up transport package zip...');
 $builder->pack();
 
-$tend = explode(' ', microtime());
-$tend = $tend[1] + $tend[0];
+$tend = microtime(true);
 $totalTime = sprintf("%2.4f s", ($tend - $tstart));
 $modx->log(modX::LOG_LEVEL_INFO, "\n\nPackage Built. \nExecution time: {$totalTime}\n");
 if (!XPDO_CLI_MODE) {

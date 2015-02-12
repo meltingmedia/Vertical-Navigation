@@ -3,10 +3,12 @@
 Transforms MODX Revolution west region (left navigation) into an accessible vertical navigation.
 Works well with "Tree Menu" component (to add extra menu records).
 
+Thanks to [MODX LLC](http://modx.com/company/) for the funding.
+
 
 ## Requirements
 
-* PHP >= 5.3
+* PHP 5.3+
 * MODX Revolution 2.3+
 
 Note : the component might not work with custom manager themes overriding `MODx.Layout#getWest`, `MODx.Layout#getLeftBar` or `MODx.Layout#addToLeftBar`, since those methods are overridden to handle vertical menu entries.
@@ -42,3 +44,9 @@ The DOM structure is :
 4. create system setting `vnav.use_vnav` as combo boolean & set its value to `1`
 
 You should be ready to go
+
+
+## License
+
+CmpStarter is licensed under the [MIT license](LICENSE.md).
+Copyright 2014 Melting Media <https://github.com/meltingmedia>
