@@ -14,6 +14,14 @@ Thanks to [MODX LLC](http://modx.com/company/) for the funding.
 Note : the component might not work with custom manager themes overriding `MODx.Layout#getWest`, `MODx.Layout#getLeftBar` or `MODx.Layout#addToLeftBar`, since those methods are overridden to handle vertical menu entries.
 
 
+## Installation
+
+1. Download and install the transport package
+2. Head over system settings (or user settings if you want this only for your user) and set `vnav.use_vnav` value to `1`
+
+You should be ready to go once you reload the manager
+
+
 ## DOM structure & technical details
 
 By using Vertical Navigation, the west region is transformed and no more makes use of tabs.
@@ -36,14 +44,9 @@ The DOM structure is :
                     * `div.x-panel-body` (content container)
 
 
-## Installation from sources
+## Bug reports
 
-1. copy folders in their appropriate locations (`core/components/verticalnavigation/` & `manager/assets/components/verticalnavigation/`)
-2. create `verticalnavigation` namespace
-3. create a plugin from `elements/plugins/plugin.php` bound to `OnBeforeManagerPageInit` system event
-4. create system setting `vnav.use_vnav` as combo boolean & set its value to `1`
-
-You should be ready to go
+Head over <https://github.com/meltingmedia/Vertical-Navigation/issues>
 
 
 ## License
