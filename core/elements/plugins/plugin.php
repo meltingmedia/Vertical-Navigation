@@ -5,7 +5,7 @@
  * @var modX $modx
  * @var array $scriptProperties
  *
- * @event OnManagerPageBeforeInit
+ * @event OnBeforeManagerPageInit
  */
 
 /** @var modManagercontroller $controller */
@@ -15,7 +15,7 @@ if ($modx->getOption('vnav.use_vnav')) {
     $base = $modx->getOption(
         'vnav.assets_url',
         null,
-        $modx->getOption('manager_url') . 'assets/components/verticalnavigation/'
+        $modx->getOption('assets_url') . 'components/verticalnavigation/'
     );
     // Base CSS
     $controller->addCss($base . 'css/app.css');

@@ -1,7 +1,7 @@
 # Vertical Navigation
 
 Transforms MODX Revolution west region (left navigation) into an accessible vertical navigation.
-Works well with "Tree Menu" component (to add extra menu records).
+Works well with "Tree Menu" component (to add extra menu records, to be released).
 
 Thanks to [MODX LLC](http://modx.com/company/) for the funding.
 

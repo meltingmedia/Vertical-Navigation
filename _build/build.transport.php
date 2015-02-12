@@ -34,7 +34,7 @@ unset($root);
 // Override with your own defines here (see build.config.sample.php)
 require_once $sources['build'] . 'build.config.php';
 require_once MODX_CORE_PATH . 'model/modx/modx.class.php';
-require_once $sources['build'] . '/includes/helper.php';
+require_once $sources['build'] . 'includes/helper.php';
 
 // Instantiate modX
 $modx = new modX();
@@ -68,7 +68,7 @@ $category->set('category', PKG_NAME);
 // Add plugin
 $modx->log(modX::LOG_LEVEL_INFO, 'Packaging in plugins...');
 $plugins = include $sources['data'] . 'plugins.php';
-if (empty($snippets)) {
+if (empty($plugins)) {
     $modx->log(modX::LOG_LEVEL_ERROR, 'Could not package in plugins.');
 }
 $category->addMany($plugins);
@@ -99,11 +99,15 @@ $vehicle = $builder->createVehicle($category, $attr);
 
 $modx->log(modX::LOG_LEVEL_INFO, 'Adding file resolvers to category...');
 $vehicle->resolve('file', array(
-    'source' => $sources['assets'],
+    'source' => $sources['assets'] . 'css/',
     'target' => "return MODX_ASSETS_PATH . 'components/" . PKG_NAME_LOWER . "/';",
 ));
 $vehicle->resolve('file', array(
-    'source' => $sources['core'],
+    'source' => $sources['assets'] . 'js/',
+    'target' => "return MODX_ASSETS_PATH . 'components/" . PKG_NAME_LOWER . "/';",
+));
+$vehicle->resolve('file', array(
+    'source' => $sources['core'] . 'lexicon/',
     'target' => "return MODX_CORE_PATH . 'components/" . PKG_NAME_LOWER . "/';",
 ));
 $builder->putVehicle($vehicle);
