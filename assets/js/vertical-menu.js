@@ -418,7 +418,6 @@ Ext.override(MODx.Layout, {
      * @param {Object} state
      */
     ,onBeforeStateSave: function(component, state) {
-        return;
         var collapsed = state.collapsed;
         if (collapsed && !this.stateSave) {
             this.stateSave = true;
