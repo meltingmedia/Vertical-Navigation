@@ -9,7 +9,7 @@ set_time_limit(0);
 // Define package names
 define('PKG_NAME', 'VerticalNavigation');
 define('PKG_NAME_LOWER', strtolower(PKG_NAME));
-define('PKG_VERSION', '0.1.0');
+define('PKG_VERSION', '0.1.1');
 define('PKG_RELEASE', 'pl');
 
 // Define build paths
@@ -27,7 +27,7 @@ $sources = array(
     'assets'     => $root . 'assets/',
     'core'       => $root . 'core/',
 
-    'build_dir'  => '/home/_builds/verticalnavigation/'
+    'build_dir' => $root . '_build/_packages/'
 );
 unset($root);
 
@@ -50,7 +50,7 @@ $builder = new modPackageBuilder($modx);
 if (isset($sources['build_dir']) && !empty($sources['build_dir'])) {
     $exists = true;
     if (!file_exists($sources['build_dir'])) {
-        $exists = mkdir($sources['build_dir'], null, true);
+        $exists = mkdir($sources['build_dir'], 0777, true);
     }
     if ($exists) {
         $builder->directory = $sources['build_dir'];
@@ -110,6 +110,9 @@ $vehicle->resolve('file', array(
     'source' => $sources['core'] . 'lexicon/',
     'target' => "return MODX_CORE_PATH . 'components/" . PKG_NAME_LOWER . "/';",
 ));
+$vehicle->resolve('php', array(
+    'source' => $sources['resolvers'] . 'setup.php',
+));
 $builder->putVehicle($vehicle);
 
 // Load system settings
@@ -136,6 +139,10 @@ $builder->setPackageAttributes(array(
     'license'   => file_get_contents($sources['root'] . 'LICENSE.md'),
     'readme'    => file_get_contents($sources['root'] . 'README.md'),
     'changelog' => file_get_contents($sources['root'] . 'CHANGELOG.md'),
+
+    'setup-options' => array(
+        'source' => $sources['build'] . 'setup.options.php',
+    ),
 ));
 
 // Zip up package
