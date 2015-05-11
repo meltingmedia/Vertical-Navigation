@@ -18,5 +18,5 @@ Changes for Vertical Navigation component.
 * First PoC
 
 
-[0.1.1-pl]: https://github.com/meltingmedia/Vertical-Navigation/compare/v0.1.1-pl...v0.1.0-pl
+[0.1.1-pl]: https://github.com/meltingmedia/Vertical-Navigation/compare/v0.1.0-pl...v0.1.1-pl
 [0.1.0-pl]: https://github.com/meltingmedia/Vertical-Navigation/compare/v0.0.1-dev...v0.1.0-pl
